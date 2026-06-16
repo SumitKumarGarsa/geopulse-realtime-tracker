@@ -1,20 +1,18 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+
 const http = require("http");
+const path = require("path");
 
 const socketio = require("socket.io");
-
 const server = http.createServer(app);
-
-
 const io = socketio(server);
 
-app.get('/', (req, res) => {
-    res.send('Hey');
+app.set("view engine", "ejs");
+app.set(express.static(path.join(__dirname,"public", )));
+
+app.get("/", (req, res) => {
+  res.send("Hey");
 });
 
-const PORT = 3000;
-
-server.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+server.listen(3000);
